@@ -1,0 +1,81 @@
+{
+  "resourceType": "Measure",
+  "id": "HIVIND19",
+  "description": "Number of HIV tests performed (volume) and the % of HIV-positive results returned to people (positivity)",
+  "url": "http://smart.who.int/smart-hiv/Measure/HIVIND19",
+  "version": "0.3.0",
+  "status": "draft",
+  "experimental": false,
+  "date": "2024-05-29",
+  "name": "HIVIND19",
+  "publisher": "World Health Organization (WHO)",
+  "library": [
+    "hivind19|0.3.0"
+  ],
+  "scoring": {
+    "coding": [
+      {
+        "code": "proportion",
+        "system": "http://terminology.hl7.org/CodeSystem/measure-scoring",
+        "display": "Proportion"
+      }
+    ]
+  },
+  "group": [
+    {
+      "population": [
+        {
+          "id": "HIVIND19.InitialPopulation",
+          "description": "Initial Population",
+          "code": {
+            "coding": [
+              {
+                "code": "initial-population",
+                "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+                "display": "Initial Population"
+              }
+            ]
+          },
+          "criteria": {
+            "language": "text/cql",
+            "expression": "denominator"
+          }
+        },
+        {
+          "id": "HIVIND19.Denominator",
+          "description": "Denominator",
+          "code": {
+            "coding": [
+              {
+                "code": "denominator",
+                "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+                "display": "Denominator"
+              }
+            ]
+          },
+          "criteria": {
+            "language": "text/cql",
+            "expression": "denominator"
+          }
+        },
+        {
+          "id": "HIVIND19.Numerator",
+          "description": "Numerator",
+          "code": {
+            "coding": [
+              {
+                "code": "numerator",
+                "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+                "display": "Numerator"
+              }
+            ]
+          },
+          "criteria": {
+            "language": "text/cql",
+            "expression": "numerator"
+          }
+        }
+      ]
+    }
+  ]
+}
