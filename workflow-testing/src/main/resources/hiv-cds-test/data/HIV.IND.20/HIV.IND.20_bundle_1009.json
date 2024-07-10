@@ -1,0 +1,154 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "status": "final",
+                "code": {
+                    "text": "Key population member"
+                },
+                "subject": {
+                    "reference": "Patient/1293f91c-6517-464a-b7a4-92b3873ffa1a"
+                },
+                "valueString": "MSM"
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Observation"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Condition",
+                "clinicalStatus": {
+                    "coding": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                            "code": "active",
+                            "display": "Active"
+                        }
+                    ]
+                },
+                "verificationStatus": {
+                    "coding": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                            "code": "confirmed"
+                        }
+                    ]
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "161920001",
+                            "display": "Presumptive TB"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1293f91c-6517-464a-b7a4-92b3873ffa1a"
+                },
+                "onsetDateTime": "2023-09-09 20:25:27.270942+00:00"
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Condition"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "ServiceRequest",
+                "id": "58c08ab2-8b4b-4c1f-a8ad-409904e6aafd",
+                "status": "active",
+                "intent": "order",
+                "code": {
+                    "concept": {
+                        "coding": [
+                            {
+                                "system": "http://snomed.info/sct",
+                                "code": "31676001",
+                                "display": "HIV Antigen test"
+                            }
+                        ]
+                    }
+                },
+                "subject": {
+                    "reference": "Patient/1293f91c-6517-464a-b7a4-92b3873ffa1a"
+                },
+                "authoredOn": "2024-03-08 20:25:27.270942+00:00"
+            },
+            "request": {
+                "method": "PUT",
+                "url": "ServiceRequest"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "ad5e41e7-c717-4a64-9419-94402f96c402",
+                "basedOn": [
+                    {
+                        "reference": "ServiceRequest/58c08ab2-8b4b-4c1f-a8ad-409904e6aafd"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "31676001",
+                            "display": "HIV Antigen test"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1293f91c-6517-464a-b7a4-92b3873ffa1a"
+                },
+                "result": [
+                    {
+                        "reference": "Observation/2fa60894-703d-4f4f-9ec1-3c92fb200449"
+                    }
+                ]
+            },
+            "request": {
+                "method": "PUT",
+                "url": "DiagnosticReport"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "2fa60894-703d-4f4f-9ec1-3c92fb200449",
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "31676001",
+                            "display": "HIV Antigen test"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1293f91c-6517-464a-b7a4-92b3873ffa1a"
+                },
+                "valueCodeableConcept": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "419984006",
+                            "display": "Inconclusive"
+                        }
+                    ]
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Observation"
+            }
+        }
+    ]
+}

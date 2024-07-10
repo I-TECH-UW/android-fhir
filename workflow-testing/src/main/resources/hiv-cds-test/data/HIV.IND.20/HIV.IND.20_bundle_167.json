@@ -1,0 +1,121 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "status": "final",
+                "code": {
+                    "text": "Key population member"
+                },
+                "subject": {
+                    "reference": "Patient/e1f2493f-0816-447c-ab0a-9b422781ff6e"
+                },
+                "valueString": "PWID"
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Observation"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Condition",
+                "clinicalStatus": {
+                    "coding": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                            "code": "active",
+                            "display": "Active"
+                        }
+                    ]
+                },
+                "verificationStatus": {
+                    "coding": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                            "code": "confirmed"
+                        }
+                    ]
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "56717001",
+                            "display": "Diagnosed TB"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/e1f2493f-0816-447c-ab0a-9b422781ff6e"
+                },
+                "onsetDateTime": "2023-07-05 20:25:27.270942+00:00"
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Condition"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "ServiceRequest",
+                "id": "957b194c-6fe8-44ba-8b6c-ce3aacb1c64b",
+                "status": "active",
+                "intent": "order",
+                "code": {
+                    "concept": {
+                        "coding": [
+                            {
+                                "system": "http://snomed.info/sct",
+                                "code": "31676001",
+                                "display": "HIV Antigen test"
+                            }
+                        ]
+                    }
+                },
+                "subject": {
+                    "reference": "Patient/e1f2493f-0816-447c-ab0a-9b422781ff6e"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "ServiceRequest"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "70b4dbb1-5123-453d-88e7-a900b3b5f92d",
+                "basedOn": [
+                    {
+                        "reference": "ServiceRequest/957b194c-6fe8-44ba-8b6c-ce3aacb1c64b"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "31676001",
+                            "display": "HIV Antigen test"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/e1f2493f-0816-447c-ab0a-9b422781ff6e"
+                },
+                "result": [
+                    {
+                        "reference": "Observation/8841c7c0-5f0b-422b-ab93-c05d0d03e8d7"
+                    }
+                ]
+            },
+            "request": {
+                "method": "PUT",
+                "url": "DiagnosticReport"
+            }
+        }
+    ]
+}

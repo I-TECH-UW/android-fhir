@@ -1,0 +1,192 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "status": "final",
+                "code": {
+                    "text": "Key population member"
+                },
+                "subject": {
+                    "reference": "Patient/3e4a056b-3804-4cf1-98a1-c9c95813a0ea"
+                },
+                "valueString": "PWUD"
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Observation"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Condition",
+                "clinicalStatus": {
+                    "coding": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                            "code": "active",
+                            "display": "Active"
+                        }
+                    ]
+                },
+                "verificationStatus": {
+                    "coding": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                            "code": "confirmed"
+                        }
+                    ]
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "161920001",
+                            "display": "Presumptive TB"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/3e4a056b-3804-4cf1-98a1-c9c95813a0ea"
+                },
+                "onsetDateTime": "2024-04-24 20:25:27.270942+00:00"
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Condition"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Condition",
+                "clinicalStatus": {
+                    "coding": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                            "code": "active",
+                            "display": "Active"
+                        }
+                    ]
+                },
+                "verificationStatus": {
+                    "coding": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                            "code": "confirmed"
+                        }
+                    ]
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "86406008",
+                            "display": "Human immunodeficiency virus infection"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/3e4a056b-3804-4cf1-98a1-c9c95813a0ea"
+                },
+                "onsetDateTime": "2024-05-28 20:25:27.270942+00:00"
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Condition"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "ServiceRequest",
+                "id": "03a0dff7-89ab-4320-849c-6ea719793e36",
+                "status": "active",
+                "intent": "order",
+                "code": {
+                    "concept": {
+                        "coding": [
+                            {
+                                "system": "http://snomed.info/sct",
+                                "code": "31676001",
+                                "display": "HIV Antigen test"
+                            }
+                        ]
+                    }
+                },
+                "subject": {
+                    "reference": "Patient/3e4a056b-3804-4cf1-98a1-c9c95813a0ea"
+                },
+                "authoredOn": "2023-07-20 20:25:27.270942+00:00"
+            },
+            "request": {
+                "method": "PUT",
+                "url": "ServiceRequest"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "845c3fde-3321-46e4-9e92-3fbadd1349af",
+                "basedOn": [
+                    {
+                        "reference": "ServiceRequest/03a0dff7-89ab-4320-849c-6ea719793e36"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "31676001",
+                            "display": "HIV Antigen test"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/3e4a056b-3804-4cf1-98a1-c9c95813a0ea"
+                },
+                "result": [
+                    {
+                        "reference": "Observation/4ce3e82b-838e-4941-aeec-696af7051f69"
+                    }
+                ]
+            },
+            "request": {
+                "method": "PUT",
+                "url": "DiagnosticReport"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "4ce3e82b-838e-4941-aeec-696af7051f69",
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "31676001",
+                            "display": "HIV Antigen test"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/3e4a056b-3804-4cf1-98a1-c9c95813a0ea"
+                },
+                "valueCodeableConcept": {
+                    "coding": [
+                        {
+                            "code": "1234567",
+                            "display": "Unrelated"
+                        }
+                    ]
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Observation"
+            }
+        }
+    ]
+}

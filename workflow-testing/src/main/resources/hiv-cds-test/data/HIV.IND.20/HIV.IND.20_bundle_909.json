@@ -1,0 +1,83 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "status": "final",
+                "code": {
+                    "text": "Key population member"
+                },
+                "subject": {
+                    "reference": "Patient/a0a25f48-7644-48c6-bc5d-ee05ba07dd15"
+                },
+                "valueString": "PWUD"
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Observation"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "ServiceRequest",
+                "id": "615751e5-995f-4cf0-b09c-b59a4452cb15",
+                "status": "active",
+                "intent": "order",
+                "code": {
+                    "concept": {
+                        "coding": [
+                            {
+                                "system": "http://snomed.info/sct",
+                                "code": "31676001",
+                                "display": "HIV Antigen test"
+                            }
+                        ]
+                    }
+                },
+                "subject": {
+                    "reference": "Patient/a0a25f48-7644-48c6-bc5d-ee05ba07dd15"
+                },
+                "authoredOn": "2023-10-04 20:25:27.270942+00:00"
+            },
+            "request": {
+                "method": "PUT",
+                "url": "ServiceRequest"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "a5dceac1-80c9-47cc-ac94-93f894c31075",
+                "basedOn": [
+                    {
+                        "reference": "ServiceRequest/615751e5-995f-4cf0-b09c-b59a4452cb15"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "31676001",
+                            "display": "HIV Antigen test"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/a0a25f48-7644-48c6-bc5d-ee05ba07dd15"
+                },
+                "result": [
+                    {
+                        "reference": "Observation/50e79eb7-a7e2-4eef-86cc-25e32e1b760a"
+                    }
+                ]
+            },
+            "request": {
+                "method": "PUT",
+                "url": "DiagnosticReport"
+            }
+        }
+    ]
+}
