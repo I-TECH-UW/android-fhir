@@ -121,8 +121,53 @@ class FhirOperatorLibraryEvaluateJavaTest {
         expressions = setOf("CompletedImmunization"),
       ) as Parameters
 
+    println(jsonParser.setPrettyPrint(true).encodeResourceToString(results))
+
     assertThat(results.getParameterBool("CompletedImmunization")).isTrue()
   }
+
+  @Test
+  fun evaluateSmartHivIGAdministrativeStratifier() = runBlockingOnWorkerThread {
+    // Load patient
+    val patients = load("/hiv-cds-test/Patients-bundle.json") as Bundle
+
+    // Load Observations
+    val observationsBundle =
+      load("/hiv-cds-test/indicator_bundle.json") as Bundle
+
+    for (entry in patients.entry) {
+      fhirEngine.create(entry.resource)
+    }
+
+    for (entry in observationsBundle.entry) {
+      fhirEngine.create(entry.resource)
+    }
+
+    knowledgeManager.install(writeToFile(load("/hiv-cds-test/libraries/Library-FHIRHelpersLogic.json") as Library))
+    knowledgeManager.install(writeToFile(load("/hiv-cds-test/libraries/Library-FHIRCommonLogic.json") as Library))
+    knowledgeManager.install(writeToFile(load("/hiv-cds-test/libraries/Library-HIVConceptsLogic.json") as Library))
+    knowledgeManager.install(writeToFile(load("/hiv-cds-test/libraries/Library-HIVConceptsCustomLogic.json") as Library))
+    knowledgeManager.install(writeToFile(load("/hiv-cds-test/libraries/Library-WHOCommonLogic.json") as Library))
+    knowledgeManager.install(writeToFile(load("/hiv-cds-test/libraries/Library-HIVIndicatorCommonLogic.json") as Library))
+
+    // Load Library that checks if Patient's gender (Stratifier)
+    knowledgeManager.install(writeToFile(load("/hiv-cds-test/Library-HIVIND19Logic.json") as Library))
+
+    // Evaluates a specific Patient
+    val results =
+      fhirOperator.evaluateLibrary(
+        libraryUrl = "http://smart.who.int/HIV/Library/HIVIND19Logic",
+        patientId = "ab0ccb5a-a20d-4159-a438-4845d22af90c",
+        expressions = setOf("Administrative Gender Stratifier"),
+      ) as Parameters
+
+    println(jsonParser.setPrettyPrint(true).encodeResourceToString(results))
+
+    assertThat(results.getParameterValue("Administrative Gender Stratifier")
+      .getChildByName("display").values[0].toString())
+      .isEqualTo("Male")
+  }
+
 
   @Test
   fun evaluateCQL() = runBlockingOnWorkerThread {

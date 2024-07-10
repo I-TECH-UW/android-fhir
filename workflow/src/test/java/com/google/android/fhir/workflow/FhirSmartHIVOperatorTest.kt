@@ -45,6 +45,13 @@ import org.junit.runner.RunWith
 import org.opencds.cqf.fhir.cr.measure.common.MeasureEvalType
 import org.robolectric.RobolectricTestRunner
 import org.skyscreamer.jsonassert.JSONAssert.assertEquals
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+import kotlin.io.path.listDirectoryEntries
+import kotlin.streams.toList
+
+//import kotlin.io.file.Path.listDirectoryEntries
 
 @RunWith(RobolectricTestRunner::class)
 class FhirSmartHIVOperatorTest {
@@ -67,7 +74,7 @@ class FhirSmartHIVOperatorTest {
     fhirOperator = FhirOperator(fhirContext, fhirEngine, knowledgeManager)
 
     // Installing ANC CDS to the IGManager
-    val rootDirectory = File(javaClass.getResource("/hiv-cds")!!.file)
+    val rootDirectory = File(javaClass.getResource("/hiv-cds-test")!!.file)
     knowledgeManager.install(
       FhirNpmPackage(
         "com.google.android.fhir",
@@ -80,19 +87,49 @@ class FhirSmartHIVOperatorTest {
 
   @Test
   fun evaluateSmartHIVPopulationMeasure() = runBlockingOnWorkerThread {
-    loadFile("/hiv-cds/library-hivind19.json", ::installToIgManager)
-    loadFile("/hiv-cds/Measure-HIVIND19.json", ::installToIgManager)
+    loadFile("/hiv-cds-test/cql/HIVIND19Logic.cql", ::installToIgManager)
+    loadFile("/hiv-cds-test/Measure-HIVIND19.json", ::installToIgManager)
+    loadFile("/hiv-cds-test/HIV.IND.19_bundle_5.json" , ::importToFhirEngine)
 
     val measureReport =
       fhirOperator.evaluateMeasure(
-        measureUrl = "http://smart.who.int/smart-hiv/Measure/HIVIND19",
-        start = "2019-01-01",
-        end = "2021-12-31",
+        measureUrl = "http://smart.who.int/HIV/Measure/HIVIND19",
+        start = "2020-01-04",
+        end = "2020-01-31",
         reportType = MeasureEvalType.POPULATION.toCode(),
         subjectId = null,
         practitioner = null,
       )
-   // WorkIn progress
+    measureReport.date = null
+    println(jsonParser.setPrettyPrint(true).encodeResourceToString(measureReport))
+
+//    assertEquals(
+//      readResourceAsString("/first-contact/04-results/population-report.json"),
+//      jsonParser.setPrettyPrint(true).encodeResourceToString(measureReport),
+//      true,
+//    )
+
+//    val directoryEntries = listFilesInDirectory("/Users/abertnamanya/projects/android-fhir/workflow-testing/src/main/resources/hiv-cds-test/data/HIV.IND.19/test")
+//
+//    directoryEntries.forEach {
+//      loadFile("/hiv-cds-test/data/HIV.IND.19/test/" + it, ::importToFhirEngine)
+//    }
+
+//    loadFile("/hiv-cds-test/Patients-bundle.json" , ::importToFhirEngine)
+//    loadFile("/hiv-cds-test/Observation.json" , ::importToFhirEngine)
+
+
+    // CQL VALIDATION
+
+    //    loadFile("/hiv-cds-test/cql/FHIRHelpers.cql", ::installToIgManager)
+//    loadFile("/hiv-cds-test/cql/FHIRCommon.cql", ::installToIgManager)
+//    loadFile("/hiv-cds-test/cql/WHOCommon.cql", ::installToIgManager)
+//    loadFile("/hiv-cds-test/cql/HIVConcepts.cql", ::installToIgManager)
+//    loadFile("/hiv-cds-test/cql/HIVConceptsCustom.cql", ::installToIgManager)
+//    loadFile("/hiv-cds-test/cql/HIVIndicatorCommon.cql", ::installToIgManager)
+//    loadFile("/hiv-cds-test/cql/HIVIND19Logic.cql", ::installToIgManager)
+
+
   }
 
 
@@ -175,7 +212,7 @@ class FhirSmartHIVOperatorTest {
   }
 
   @Test
-  @Ignore("Bug on workflow incorrectly returns 2022-12-31T00:00:00 instead of 2021-12-31T23:59:59")
+//  @Ignore("Bug on workflow incorrectly returns 2022-12-31T00:00:00 instead of 2021-12-31T23:59:59")
   fun evaluatePopulationMeasure() = runBlockingOnWorkerThread {
     loadFile("/first-contact/01-registration/patient-charity-otala-1.json", ::importToFhirEngine)
     loadFile(
@@ -211,7 +248,7 @@ class FhirSmartHIVOperatorTest {
   }
 
   @Test
-  @Ignore("Pending testing for smart-HIV IG")
+
   fun evaluateGroupPopulationMeasure() = runBlockingOnWorkerThread {
     loadFile("/group-measure/PatientGroups-1.0.0.cql", ::installToIgManager)
     loadFile("/group-measure/PatientGroupsMeasure.json", ::installToIgManager)
@@ -230,6 +267,7 @@ class FhirSmartHIVOperatorTest {
       )
 
     measureReport.date = null
+    println(jsonParser.setPrettyPrint(true).encodeResourceToString(measureReport))
 
     assertEquals(
       readResourceAsString("/group-measure/Results-Measure-report.json"),
@@ -340,5 +378,13 @@ class FhirSmartHIVOperatorTest {
 
   private suspend fun installToIgManager(resource: Resource) {
     knowledgeManager.install(writeToFile(resource))
+  }
+
+  private fun listFilesInDirectory(directoryPath: String): List<String> {
+    val directory = File(directoryPath)
+    if (directory.exists() && directory.isDirectory) {
+      return directory.listFiles()?.map { it.name } ?: emptyList()
+    }
+    return emptyList()
   }
 }

@@ -1,0 +1,230 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "status": "final",
+        "code": {
+          "text": "Key population member"
+        },
+        "subject": {
+          "reference": "Patient/ab0ccb5a-a20d-4159-a438-4845d22af90c"
+        },
+        "valueString": "MSM"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "56717001",
+              "display": "Diagnosed TB"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/ab0ccb5a-a20d-4159-a438-4845d22af90c"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "161920001",
+              "display": "Presumptive TB"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/ab0ccb5a-a20d-4159-a438-4845d22af90c"
+        }
+
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "86406008",
+              "display": "Human immunodeficiency virus infection"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/ab0ccb5a-a20d-4159-a438-4845d22af90c"
+        }
+
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "81521b20-ce0b-453a-824c-c1df6fdd2ccb",
+        "status": "active",
+        "intent": "order",
+        "code": {
+          "concept": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "31676001",
+                "display": "HIV Antigen test"
+              }
+            ]
+          }
+        },
+        "subject": {
+          "reference": "Patient/ab0ccb5a-a20d-4159-a438-4845d22af90c"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ServiceRequest"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "6a6c744b-4bcb-4467-954c-95d19b42d53f",
+        "basedOn": [
+          {
+            "reference": "ServiceRequest/81521b20-ce0b-453a-824c-c1df6fdd2ccb"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "31676001",
+              "display": "HIV Antigen test"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/ab0ccb5a-a20d-4159-a438-4845d22af90c"
+        },
+        "result": [
+          {
+            "reference": "Observation/14b1b1ff-3de2-43d3-bb79-a58b16de8a40"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DiagnosticReport"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "14b1b1ff-3de2-43d3-bb79-a58b16de8a40",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "31676001",
+              "display": "HIV Antigen test"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/ab0ccb5a-a20d-4159-a438-4845d22af90c"
+        },
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "165815009",
+              "display": "HIV Negative"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation"
+      }
+    }
+  ]
+}
